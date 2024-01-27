@@ -1,12 +1,21 @@
 import { useState } from "react";
 import ProductJson from "./ProductJson";
 import ProductCard from "./ProductCard";
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
+import AddProductModel from "./AddProductModel";
 
 function ProductList() {
   const [searchQuery, setSearchQuery] = useState("");
   const [products, setProducts] = useState<any>(ProductJson);
+  const [open, setOpen] = useState(false);
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -18,6 +27,12 @@ function ProductList() {
     setProducts(filteredProducts);
   };
 
+  const handleAddProduct = (product: any) => {
+    setProducts([...products, { ...product, id: products.length + 1 }]);
+    handleClose();
+
+    console.log(product, "product");
+  };
 
   return (
     <div>
@@ -26,11 +41,20 @@ function ProductList() {
         value={searchQuery}
         onChange={handleSearch}
         placeholder="Search by product name"
-        label="Search Product"
+        label="Search Product "
         size="small"
         sx={{ mb: 2 }}
       />
+      <Button variant="contained" onClick={handleClickOpen} sx={{ ml: 2 }}>
+        Add Product
+      </Button>
       <ProductCard products={products} />
+
+      <AddProductModel
+        handleAddProduct={handleAddProduct}
+        handleClose={handleClose}
+        open={open}
+      ></AddProductModel>
     </div>
   );
 }
