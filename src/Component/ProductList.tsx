@@ -26,7 +26,7 @@ function ProductList() {
         value={searchQuery}
         onChange={handleSearch}
         placeholder="Search by product name"
-        label="Product Name"
+        label="Search Product"
         size="small"
         sx={{ mb: 2 }}
       />
