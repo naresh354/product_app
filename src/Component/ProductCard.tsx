@@ -20,8 +20,12 @@ const ProductCard = ({ products }: any) => {
         />
   
         <CardContent>
+       
           <Typography gutterBottom variant="h5" component="div">
             {product?.name}
+          </Typography>
+          <Typography sx={{ mb: 1, fontSize: "0.8rem", fontWeight: "700", color: "#8d8d8d" }} component="div">
+            category: <span style={{ fontSize: "0.7rem", color: "green" }} >{product?.category}</span>
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {product?.description}
